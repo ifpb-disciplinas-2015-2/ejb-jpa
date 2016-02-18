@@ -6,7 +6,7 @@
 
 package io.github.jass2125.pesoa.jpa.core.beans;
 
-import io.github.jass2125.pesoa.jpa.core.business.Person;
+import io.github.jass2125.pesoa.jpa.core.business.Image;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
@@ -16,8 +16,8 @@ import io.github.jass2125.pesoa.jpa.core.business.Person;
  * Encoding UTF-8
  * File Name IManagerPerson.java
  */
-public interface IManagerPerson {
+public interface IManagerImage {
     
-    public void add(Person person);
+    public void add(Image image);
     
 }

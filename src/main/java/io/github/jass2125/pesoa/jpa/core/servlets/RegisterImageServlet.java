@@ -6,7 +6,8 @@
 
 package io.github.jass2125.pesoa.jpa.core.servlets;
 
-import io.github.jass2125.pesoa.jpa.core.beans.IManagerPerson;
+import io.github.jass2125.pesoa.jpa.core.beans.IManagerImage;
+import io.github.jass2125.pesoa.jpa.core.business.Image;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -29,10 +30,9 @@ import org.apache.commons.io.IOUtils;
  */
 
 @WebServlet(urlPatterns = {"/add"})
-public class RegisterPersonServlet extends HttpServlet {
-    
+public class RegisterImageServlet extends HttpServlet {
     @EJB
-    private IManagerPerson p;
+    private IManagerImage manager;
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,6 +47,8 @@ public class RegisterPersonServlet extends HttpServlet {
                     String name = stream.getName();
                     if( fieldName.equals("img") ) {
                         byte bytes[] = IOUtils.toByteArray(stream.openStream());
+                        Image image = new Image(bytes);
+                        manager.add(image);
                     }
                 }
                 

@@ -6,7 +6,7 @@
 
 package io.github.jass2125.pesoa.jpa.core.beans;
 
-import io.github.jass2125.pesoa.jpa.core.business.Person;
+import io.github.jass2125.pesoa.jpa.core.business.Image;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
@@ -20,11 +20,11 @@ import javax.ejb.Stateless;
  */
 
 @Stateless
-@Local(IManagerPerson.class)
-public class ManagerPerson implements IManagerPerson {
+@Local(IManagerImage.class)
+public class ManagerImage implements IManagerImage {
     
     @Override
-    public void add(Person person) {
+    public void add(Image imagee) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
