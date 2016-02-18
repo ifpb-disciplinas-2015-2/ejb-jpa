@@ -6,7 +6,7 @@
 
 package io.github.jass2125.pesoa.jpa.core.beans;
 
-import io.github.jass2125.pesoa.jpa.core.business.Image;
+import io.github.jass2125.pesoa.jpa.core.business.Images;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
@@ -18,6 +18,8 @@ import io.github.jass2125.pesoa.jpa.core.business.Image;
  */
 public interface IManagerImage {
     
-    public void add(Image image);
+    public void add(Images image);
+    
+    public Object search(Long id);
     
 }

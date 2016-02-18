@@ -6,7 +6,7 @@
 
 package io.github.jass2125.pesoa.jpa.core.dao;
 
-import io.github.jass2125.pesoa.jpa.core.business.Image;
+import io.github.jass2125.pesoa.jpa.core.business.Images;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com> <jair_anderson_bs@hotmail.com>
@@ -18,6 +18,6 @@ import io.github.jass2125.pesoa.jpa.core.business.Image;
  */
 public interface IPersonDao {
     
-    public void add(Image person);
+    public void add(Images person);
 
 }

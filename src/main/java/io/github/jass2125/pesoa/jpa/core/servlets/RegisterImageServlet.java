@@ -3,90 +3,72 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package io.github.jass2125.pesoa.jpa.core.servlets;
 
 import io.github.jass2125.pesoa.jpa.core.beans.IManagerImage;
-import io.github.jass2125.pesoa.jpa.core.business.Image;
+import io.github.jass2125.pesoa.jpa.core.business.Images;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
 /**
- * @author Anderson Souza 
- * @since 11:59:22, 16-Feb-2016 
- * Package io.github.jass2125.pesoa.jpa.core.servlets
- * Project Name pesoa-jpa
- * Encoding UTF-8
- * File Name RegisterPerson.java
+ * @author Anderson Souza
+ * @since 11:59:22, 16-Feb-2016 Package
+ * io.github.jass2125.pesoa.jpa.core.servlets Project Name pesoa-jpa Encoding
+ * UTF-8 File Name RegisterPerson.java
  */
-
 @WebServlet(urlPatterns = {"/add"})
+@MultipartConfig(location = "/tmp")
 public class RegisterImageServlet extends HttpServlet {
+
     @EJB
     private IManagerImage manager;
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean multiPart = ServletFileUpload.isMultipartContent(request);
-        if(multiPart){
-            ServletFileUpload upload = new ServletFileUpload();
-            try{
-                FileItemIterator it = upload.getItemIterator(request);
-                while(it.hasNext()){
-                    FileItemStream stream = it.next();
-                    String fieldName = stream.getFieldName();
-                    String name = stream.getName();
-                    if( fieldName.equals("img") ) {
-                        byte bytes[] = IOUtils.toByteArray(stream.openStream());
-                        Image image = new Image(bytes);
-                        manager.add(image);
-                    }
-                }
-                
-                response.sendRedirect("load.jsp");
-            }catch(Exception e){
-                e.printStackTrace();
+        try {
+            byte img[] = getImage(request);
+            response.getOutputStream().write(img);
+            response.getOutputStream().flush();
+            manager.add(new Images(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
+    
+
+//    public void verify(HttpServletRequest req) throws IOException, ServletException {
+//        List<Part> parts = (List<Part>) req.getParts();
+//        for (Part it : parts) {
+//            InputStream stream = it.getInputStream();
+//            String value = IOUtils.toString(stream);
+//            System.out.println("Name: " + it.getName());
+//            System.out.println("Header: " + stream.toString());
+//
+//        }
+//    }
+
+    public byte[] getImage(HttpServletRequest req) throws IOException, ServletException {
+        List<Part> parts = (List<Part>) req.getParts();
+        for (Part it : parts) {
+            if (it.getName().equals("img")) {
+                InputStream stream = it.getInputStream();
+                return IOUtils.toByteArray(stream);
             }
         }
-        
-        
-        
-        
-        
-        
-        
-//        Part name = request.getPart("name");
-////        String namePart = name.getName();
-//        Part birthday = request.getPart("birthday");
-//        Part img = request.getPart("img");
-//        String n = String.valueOf(name);
-//        
-//        response.getWriter().println("Name: " + name);
-//        response.getWriter().println("Name To String: " + name.toString());
-//        
-//        response.getWriter().println("Birthday:" + birthday);
-//        response.getWriter().println("Birthday To String: " + birthday.toString());
-//        
-//        response.getWriter().println("Imagem: " + img);
-//        response.getWriter().println("Imagem To String:" + img.toString());
-//        
-//        InputStream stream = img.getInputStream();
-//        img.write(img.getName());
-//        
-//        
-//        response.getWriter().println("N To String:" + n.toString());
-//        
+        return null;
     }
-    
-    
 
 }

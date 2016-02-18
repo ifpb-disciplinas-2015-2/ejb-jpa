@@ -1,7 +1,7 @@
-io/github/jass2125/pesoa/jpa/core/servlets/RegisterPersonServlet.class
-io/github/jass2125/pesoa/jpa/core/beans/IManagerPerson.class
-io/github/jass2125/pesoa/jpa/core/beans/ManagerPerson.class
+io/github/jass2125/pesoa/jpa/core/business/Images.class
+io/github/jass2125/pesoa/jpa/core/servlets/RegisterImageServlet.class
+io/github/jass2125/pesoa/jpa/core/beans/IManagerImage.class
 io/github/jass2125/pesoa/jpa/core/dao/PersonDao.class
 io/github/jass2125/pesoa/jpa/core/dao/IPersonDao.class
-io/github/jass2125/pesoa/jpa/core/business/Person.class
+io/github/jass2125/pesoa/jpa/core/beans/ManagerImage.class
 io/github/jass2125/pesoa/jpa/core/jpa/FactoryJpa.class

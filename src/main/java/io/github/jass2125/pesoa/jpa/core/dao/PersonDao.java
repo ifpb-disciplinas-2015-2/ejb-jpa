@@ -6,7 +6,7 @@
 
 package io.github.jass2125.pesoa.jpa.core.dao;
 
-import io.github.jass2125.pesoa.jpa.core.business.Image;
+import io.github.jass2125.pesoa.jpa.core.business.Images;
 import io.github.jass2125.pesoa.jpa.core.jpa.FactoryJpa;
 import javax.persistence.EntityManager;
 
@@ -21,7 +21,7 @@ import javax.persistence.EntityManager;
 public class PersonDao implements IPersonDao {
 
     @Override
-    public void add(Image person) {
+    public void add(Images person) {
         EntityManager em = FactoryJpa.getEntityManager();
         em.getTransaction().begin();
         em.persist(person);
